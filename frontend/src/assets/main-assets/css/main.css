@@ -1,4 +1,4 @@
-@import url("./fontawesome-all.min.css");
+@import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700,900");
 
 /*
@@ -35,7 +35,6 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
-	font-family: 'Gowun Dodum', sans-serif !important;
 }
 
 ol, ul {
@@ -51,6 +50,27 @@ ol, ul {
 	width: 100%;
 	margin-top : 3em;
 	margin-bottom: 3em;
+}
+
+.mt-1 {
+	margin-top: 1em;
+}
+
+.mt-5 {
+	margin-top: 5em;
+}
+
+.list li a{
+	text-decoration: none;
+    border-bottom: none;
+}
+
+.mb-1 {
+	margin-bottom: 1em;
+}
+
+.mb-5 {
+	margin-bottom: 5em;
 }
 
 .edit {
@@ -99,30 +119,6 @@ input, select, textarea {
 	-webkit-appearance: none;
 	-ms-appearance: none;
 	appearance: none;
-}
-
-.mt-1 {
-	margin-top: 1%;
-}
-
-.mt-2 {
-	margin-top: 2%;
-}
-
-.mt-3 {
-	margin-top: 3%;
-}
-
-.mt-4 {
-	margin-top: 4%;
-}
-
-.mt-5 {
-	margin-top: 5%;
-}
-
-.mt-10 {
-	margin-top: 10%;
 }
 
 * {
@@ -2224,11 +2220,10 @@ input, select, textarea {
 		border-radius: 0;
 		border-bottom: solid 1px #c9c9c9;
 		color: inherit;
-		display: block;
 		outline: 0;
 		padding: 0;
 		text-decoration: none;
-		width: 100%;
+		width: 50%;
 	}
 
 		input[type="text"]:invalid,
@@ -3403,4 +3398,4 @@ input, select, textarea {
 				padding: 0 1.25em;
 			}
 
-		}
+		}	
