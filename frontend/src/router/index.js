@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Main from "../views/Main.vue";
 
 Vue.use(VueRouter);
 
@@ -8,17 +7,14 @@ const routes = [
   {
     path: "/",
     name: "Main",
-    component: Main,
-    meta: {
-      title: "One Day Record",
-    },
+    meta:{isRequireLogin: true},
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Main.vue"),
   },
   {
     path: "/intro",
     name: "Intro",
-    meta: {
-      title: "Welcome One Day Record",
-    },
+    meta:{isRequireLogin: false},
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -28,6 +24,7 @@ const routes = [
   {
     path: "/detail",
     name: "Detail",
+    meta:{isRequireLogin: true},
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -37,16 +34,27 @@ const routes = [
   {
     path: "/write",
     name: "Write",
+    meta:{isRequireLogin: true},
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/RecordWrite.vue"),
   },
+  {
+    path: "/calendar",
+    name: "Calendar",
+    meta:{isRequireLogin: true},
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Calendar.vue"),
+  },
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  // mode: "history",
   base: process.env.BASE_URL,
   routes,
 });

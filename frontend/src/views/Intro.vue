@@ -18,6 +18,30 @@
 						</ul>
 					</nav>
 				</header>
+				<!-- Sgin In Modal -->
+				<div id="sginInModal" class="modal">
+					<div class="modal-body">
+						<div class="mt-1">
+							<span class="hanFont text-black mr-5">로그인</span>
+							<span class="text-black close" onclick="togglesginInModal();">X</span>
+						</div>
+						<form>
+							<div class="textForm">
+							  <input name="loginId" type="text" class="id" placeholder="아이디" v-model="id">
+							</div>
+							<div class="textForm">
+							  <input name="loginPw" type="password" class="pw" placeholder="비밀번호" v-model="password">
+							</div>
+							<div class="forgetBox">
+								<ul class="text-black font-size-small">
+									<li><a href="#">아이디를 잊어버리셨나요?</a></li>
+									<li><a href="#">비밀번호를 잊어버리셨나요?</a></li>
+								</ul>
+							</div>
+							<input class="btn" @click="loginSubmit"/>
+						  </form>
+					</div>
+				</div>
 				<!-- Sign Up Modal -->
 				<div v-if="modalShow" class="modal">
 					<div class="modal-body">
@@ -69,21 +93,51 @@ export default {
       active: false,
       value: null,
 	  modalShow:false,
+	  id:"",
+	  password: "",
     }),
     methods: {
+		loginSubmit: function() { 
+			this.$axios({
+				method: "post",
+				url: "http://3.36.30.114:9999/hh-record" + "/login",
+				data: {
+				id: this.id,
+				password: this.password,
+				},
+				headers: {
+				"Content-Type": "application/json",
+				},
+				mode: "cors",
+			}).then((response) => {
+				let data = response.data;
+				if(response.code === 200){
+					console.log(data)
+					sessionStorage.setItem('SESSION',data.AUTH_TOKEN);
+					this.$router.push('/')
+					// } else {
+					// alert("아이디와 비밀번호를 확인하신 후 다시 시도해 주세요.");
+					// }
+				}else{
+					alert(data.status)
+				}
+			}).catch((err)=>{
+				console.log(err)
+			});
+		},
 		toggleModal(){
 			this.modalShow = !this.modalShow;
 		},
 
-      onConfirm () {
-        this.value = 'Agreed'
-      },
-      onCancel () {
-        this.value = 'Disagreed'
-      }
+      	onConfirm () {
+      	  this.value = 'Agreed'
+      	},
+      	onCancel () {
+      	  this.value = 'Disagreed'
+      	}
     }
 };
 </script>
-<style>
+<style scoped>
 @import '../assets/intro-assets/css/main.css';
 </style>

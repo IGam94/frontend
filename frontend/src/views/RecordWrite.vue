@@ -68,6 +68,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     @import '../assets/main-assets/css/main.css';
 </style>

@@ -3,18 +3,42 @@
 
 				<Header />
 
-				<!-- Menu -->
-				<nav id="menu">
-					<h2>Menu</h2>
-					<ul>
-						<li><a href="main.html">Home</a></li>
-						<li><a href="record_detail.html">달력 보기</a></li>
-						<li><a href="record_detail.html">템플릿 보기</a></li>
-						<li><a href="record_detail.html">내 정보</a></li>
-						<li><a href="elements.html">Elements</a></li>
-					</ul>
-				</nav>
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
 
+                            <section class="mt-5">
+                                <h3>내 기록들</h3>
+                                <div class="sort-end">
+                                    <input type="text" name="search" id="search" placeholder="search" class="mb-1">
+                                    <a href="record_celendar.html" class="icon regular fa-eye sort-end mt-1"> 검색</a>
+                                </div>
+                                <div class="mt-5">
+                                    <ul class="alt list">
+                                        <li><a href="record_detail.html">2022.01.04 오늘은 사케동을 먹었다.</a></li>
+                                        <li><a href="record_detail.html">2022.01.05 오늘도 사케동을 먹었따.</a></li>
+                                        <li><a href="record_detail.html">2022.01.06 오늘은 아구찜 먹었다. 내일은 사케동 먹을거다.</a></li>
+                                        <li><a href="record_detail.html">2022.01.08 오늘 사케동을 먹으려 했는데 아구찜을 먹었따.</a></li>
+                                        <li><a href="record_detail.html">2022.01.10 Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</a></li>
+                                    </ul>
+                                </div>
+                            </section>
+                            <div class="pagination">
+                                <a href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#" class="active">3</a>
+                                <a href="#">4</a>
+                                <a href="#">5</a>
+                                <a href="#">6</a>
+                                <a href="#">7</a>
+                                <a href="#">8</a>
+                                <a href="#">9</a>
+                                <a href="#">10</a>
+                                <a href="#">&gt;</a>
+                                <a href="#">&raquo;</a>
+                            </div>
+						</div>
+					</div>
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
@@ -181,20 +205,21 @@
 
 			</div>
 </template>
-<style>
-@import '../assets/main-assets/css/main.css';
+<style scoped>
+	@import '../assets/main-assets/css/main.css';
 </style>
-<script>
-import Header from '../components/Header.vue';
-import Footer from '../components/Footer.vue';
 
-export default {
-	components:{
-		Header,Footer
-	},
-	metaInfo: {
-		// title 입력하기
-		title: 'One Day Record',
-	},
-}
+<script>
+	import Header from '../components/Header.vue';
+	import Footer from '../components/Footer.vue';
+
+	export default {
+		components:{
+			Header,Footer
+		},
+		metaInfo: {
+			// title 입력하기
+			title: 'One Day Record',
+		},
+	}
 </script>
