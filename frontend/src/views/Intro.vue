@@ -10,27 +10,27 @@
 					<p class="hanFont">나만의 일기 만들러 가기</p>
 					<nav>
 						<ul>
-							<li><a href="#" class="icon brands fa-dribbble "></a></li>
-							<li><a id="sginUpBtn" @click="toggleModal" href="#" class="icon solid fa-envelope"></a></li>
+							<li><a @click="toggleLogin" class="icon brands fa-dribbble "></a></li>
+							<li><a id="sginUpBtn" @click="toggleSignUp" class="icon solid fa-envelope"></a></li>
 							<br>
-							<span style="margin-left: 0.5em; margin-right: 1.5em;">Sign In</span>
-							<span style="margin-left: 1em;" >Sign Up</span>
+							<span style="margin-left: 0.5em; margin-right: 1.5em;" @click="toggleLogin">Sign In</span>
+							<span style="margin-left: 1em;" @click="toggleSignUp">Sign Up</span>
 						</ul>
 					</nav>
 				</header>
 				<!-- Sgin In Modal -->
-				<div id="sginInModal" class="modal">
+				<div v-if="loginShow" id="sginInModal" class="modal">
 					<div class="modal-body">
 						<div class="mt-1">
 							<span class="hanFont text-black mr-5">로그인</span>
-							<span class="text-black close" onclick="togglesginInModal();">X</span>
+							<span class="text-black close"  @click="toggleLogin">X</span>
 						</div>
 						<form>
 							<div class="textForm">
-							  <input name="loginId" type="text" class="id" placeholder="아이디" v-model="id">
+							  <input name="loginId" type="text" class="id" placeholder="아이디" v-model="loginId">
 							</div>
 							<div class="textForm">
-							  <input name="loginPw" type="password" class="pw" placeholder="비밀번호" v-model="password">
+							  <input name="loginPw" type="password" class="pw" placeholder="비밀번호" v-model="loginPassword">
 							</div>
 							<div class="forgetBox">
 								<ul class="text-black font-size-small">
@@ -38,37 +38,37 @@
 									<li><a href="#">비밀번호를 잊어버리셨나요?</a></li>
 								</ul>
 							</div>
-							<input class="btn" @click="loginSubmit"/>
+							<input class="btn" @click="loginSubmit" value="L O G I N"/>
 						  </form>
 					</div>
 				</div>
 				<!-- Sign Up Modal -->
-				<div v-if="modalShow" class="modal">
+				<div v-if="signUpShow" class="modal">
 					<div class="modal-body">
 						<div class="mt-1">
-							<span class="hanFont text-black mr-5">회원가입</span>
-							<span class="text-black close" @click="toggleModal">X</span>
+							<span class="hanFont text-black mr-5">회원가입</span>	
+							<span class="text-black close" @click="toggleSignUp">X</span>
 						</div>
-						<form action="doJoin" method="POST" onsubmit="DoJoinForm__submit(this); return false;">
+						<form onsubmit="return false;">
 							<div class="textForm">
-							  <input name="loginId" type="text" class="id" placeholder="아이디">
+							  <input name="loginId" type="text" class="id" placeholder="아이디" v-model="signUpId">
 							</div>
 							<div class="textForm">
-							  <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
+							  <input name="loginPw" type="password" class="pw" placeholder="비밀번호" v-model="signUpPassword">
 							</div>
 							 <div class="textForm">
-							  <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+							  <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인" v-model="signUpPasswordCheck">
 							</div>
 							<div class="textForm">
-							  <input name="name" type="password" class="name" placeholder="이름">
+							  <input name="name" type="text" class="name" placeholder="이름" v-model="signUpName">
 							</div>
 							 <div class="textForm">
-							  <input name="email" type="text" class="email" placeholder="이메일">
+							  <input name="email" type="text" class="email" placeholder="이메일" v-model="signUpEmail">
 							</div>
 							<div class="textForm">
-							  <input name="cellphoneNo" type="number" class="cellphoneNo" placeholder="전화번호">
+							  <input name="cellphoneNo" type="number" class="cellphoneNo" placeholder="전화번호" v-model="signUpPhoneNumber">
 							</div>
-							<input type="submit" class="btn" value="J O I N"/>
+							<input type="submit" @click="signUpSubmit" class="btn" value="J O I N"/>
 						  </form>
 					</div>
 				</div>
@@ -92,19 +92,27 @@ export default {
   data: () => ({
       active: false,
       value: null,
-	  modalShow:false,
-	  id:"",
-	  password: "",
+	  loginShow:false,
+	  signUpShow:false,
+	  loginId:"",
+	  loginPassword: "",
+	  signUpId:"",
+	  signUpPassword:"",
+	  signUpPasswordCheck:"",
+	  signUpName:"",
+	  signUpPhoneNumber:"",
+	  signUpEmail:"",
     }),
     methods: {
-		loginSubmit: function() { 
+		loginSubmit: function() {
+			let request = {
+				id: this.loginId,
+				password: this.loginPassword,
+			} 
 			this.$axios({
 				method: "post",
-				url: "http://3.36.30.114:9999/hh-record" + "/login",
-				data: {
-				id: this.id,
-				password: this.password,
-				},
+				url: "http://3.36.30.114:9999/hh-record-intro" + "/login",
+				data: request,
 				headers: {
 				"Content-Type": "application/json",
 				},
@@ -112,7 +120,7 @@ export default {
 			}).then((response) => {
 				let data = response.data;
 				if(response.code === 200){
-					console.log(data)
+					
 					sessionStorage.setItem('SESSION',data.AUTH_TOKEN);
 					this.$router.push('/')
 					// } else {
@@ -125,10 +133,44 @@ export default {
 				console.log(err)
 			});
 		},
-		toggleModal(){
-			this.modalShow = !this.modalShow;
+		signUpSubmit: function() {
+			if(this.signUpPassword !==this.signUpPasswordCheck){
+				alert("비밀번호가 일치하지 않습니다.")
+				return false
+			}
+			let request = {
+				    id:this.signUpId,
+					userName:this.signUpName,
+					email:this.signUpEmail,
+					phoneNumber:this.signUpPhoneNumber,
+					password:this.signUpPassword
+			} 
+			this.$axios({
+				method: "post",
+				url: "http://3.36.30.114:9999/hh-record-intro" + "/sign-up",
+				data: request,
+				headers: {
+				"Content-Type": "application/json",
+				},
+				mode: "cors",
+			}).then((response) => {
+				
+				if(response.code === 200){
+					alert(response.data)
+					this.toggleSignUp()
+				}else{
+					alert("회원가입에 실패하였습니다.")
+				}
+			}).catch((err)=>{
+				console.log(err)
+			});
 		},
-
+		toggleLogin(){
+			this.loginShow = !this.loginShow;
+		},
+		toggleSignUp(){
+			this.signUpShow = !this.signUpShow;
+		},
       	onConfirm () {
       	  this.value = 'Agreed'
       	},
