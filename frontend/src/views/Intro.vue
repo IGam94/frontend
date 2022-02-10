@@ -83,7 +83,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
+import { login,signUp } from '@/utils/axios' 
 
 export default {
   name: "Home",
@@ -109,15 +109,7 @@ export default {
 				id: this.loginId,
 				password: this.loginPassword,
 			} 
-			this.$axios({
-				method: "post",
-				url: "http://3.36.30.114:9999/hh-record-intro" + "/login",
-				data: request,
-				headers: {
-				"Content-Type": "application/json",
-				},
-				mode: "cors",
-			}).then((response) => {
+			login(request).then((response) => {
 				let data = response.data;
 				console.log(response)
 				if(data.code === 200){
@@ -146,18 +138,10 @@ export default {
 					phoneNumber:this.signUpPhoneNumber,
 					password:this.signUpPassword
 			} 
-			this.$axios({
-				method: "post",
-				url: "http://3.36.30.114:9999/hh-record-intro" + "/sign-up",
-				data: request,
-				headers: {
-				"Content-Type": "application/json",
-				},
-				mode: "cors",
-			}).then((response) => {
-				
-				if(response.code === 200){
-					alert(response.data)
+			signUp(request).then((response) => {
+				console.log(response)
+				if(response.data.code === 200){
+					alert(response.data.data)
 					this.toggleSignUp()
 				}else{
 					alert("회원가입에 실패하였습니다.")

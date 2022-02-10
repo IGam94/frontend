@@ -48,9 +48,7 @@ export default {
 			isActive:false,
 		}
 	},
-	created(){
-		document.querySelector(".disableLink").removeAttribute('href');
-	},
+
 	methods:{
 		menuToggle(){
 			this.isActive = !this.isActive;
