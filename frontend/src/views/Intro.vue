@@ -119,7 +119,8 @@ export default {
 				mode: "cors",
 			}).then((response) => {
 				let data = response.data;
-				if(response.code === 200){
+				console.log(response)
+				if(data.code === 200){
 					
 					sessionStorage.setItem('SESSION',data.AUTH_TOKEN);
 					this.$router.push('/')
@@ -180,6 +181,6 @@ export default {
     }
 };
 </script>
-<style scoped>
-@import '../assets/intro-assets/css/main.css';
+<style scoped src="../assets/intro-assets/css/intro.css">
+
 </style>

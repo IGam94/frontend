@@ -1,4 +1,5 @@
 <template>
+		<div id="wrapper">
   				<!-- Header -->
 					<header id="header">
 						<div class="inner">
@@ -11,36 +12,53 @@
 							<!-- Nav -->
 							<nav>
 								<ul>
-									<li><a href="#menu">Menu</a></li>
+									<li><a class="disableLink" @click="menuToggle" href="#">Menu</a></li>
 								</ul>
 							</nav>
+							
 						</div>
+					</header>
 						<!-- Menu -->
-						<body class="is-menu-visible">
+						<body :class="{'is-menu-visible':isActive}">
 
 						<nav id="menu">
 							<div class="inner">
 								<h2>Menu</h2>
 								<ul>
-									<li><a><router-link to='/Main' >Home</router-link></a></li>
-									<li><a><router-link to="/Calendar" >달력 보기</router-link></a></li>
-									<li><a><router-link to="/Detail" >템플릿 보기</router-link></a></li>
-									<li><a><router-link to="/Detail" >내 정보</router-link></a></li>
-									<li><a><router-link to="/Calendar" >Elements</router-link></a></li>
-									<li><a><router-link to="/Intro" >인트로</router-link></a></li>
+									<li><router-link to='/Main' >Home</router-link></li>
+									<li><router-link to="/Calendar" >달력 보기</router-link></li>
+									<li><router-link to="/Detail" >템플릿 보기</router-link></li>
+									<li><router-link to="/Detail" >내 정보</router-link></li>
+									<li><router-link to="/Calendar" >Elements</router-link></li>
+									<li><router-link to="/Intro" >인트로</router-link></li>
 								</ul>
 							</div>
+							<a class="close disableLink" @click="menuToggle" href="#">Close</a>
 						</nav>
+						
 						</body>
-					</header>
+			</div>
+
 </template>
 
 <script>
 export default {
-
+	data(){
+		return{
+			isActive:false,
+		}
+	},
+	created(){
+		document.querySelector(".disableLink").removeAttribute('href');
+	},
+	methods:{
+		menuToggle(){
+			this.isActive = !this.isActive;
+		}
+	}
 }
 </script>
 
-<style>
+<style scoped src="@/assets/main-assets/css/main.css">
 
 </style>

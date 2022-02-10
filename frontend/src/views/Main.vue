@@ -205,8 +205,7 @@
 
 			</div>
 </template>
-<style scoped>
-	@import '../assets/main-assets/css/main.css';
+<style scoped src="../assets/main-assets/css/main.css">
 </style>
 
 <script>

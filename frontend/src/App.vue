@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style scoped>
+<style>
 
 @import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap");
 

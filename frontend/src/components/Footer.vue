@@ -25,6 +25,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped src="@/assets/main-assets/css/main.css">
+
 
 </style>
