@@ -34,6 +34,8 @@ section, summary, time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-family: 'Gowun Dodum', sans-serif;
+	color:#fff;
 }
 
 article, aside, details, figcaption, figure,
