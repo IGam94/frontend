@@ -28,7 +28,7 @@
 									<li><router-link to='/Main' >Home</router-link></li>
 									<li><router-link to="/Calendar" >달력 보기</router-link></li>
 									<li><router-link to="/Detail" >템플릿 보기</router-link></li>
-									<li><router-link to="/Detail" >내 정보</router-link></li>
+									<li><router-link to="/mypage" >내 정보</router-link></li>
 									<li><router-link to="/Calendar" >Elements</router-link></li>
 									<li><router-link to="/Intro" >인트로</router-link></li>
 								</ul>
@@ -58,5 +58,8 @@ export default {
 </script>
 
 <style scoped src="@/assets/main-assets/css/main.css">
-
+	.inner{
+        margin : 0 !important;
+        padding : 0 !important;
+    }
 </style>

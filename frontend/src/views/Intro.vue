@@ -113,8 +113,8 @@ export default {
 				let data = response.data;
 				console.log(response)
 				if(data.code === 200){
-					
-					sessionStorage.setItem('SESSION',data.AUTH_TOKEN);
+					console.log(data)
+					sessionStorage.setItem('SESSION',data.data.AUTH_TOKEN);
 					this.$router.push('/')
 					// } else {
 					// alert("아이디와 비밀번호를 확인하신 후 다시 시도해 주세요.");
